@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <h2>First every Vue Tutorial</h2>
+    <h2 class="greenFont">My first ever Vue Tutorial</h2>
+
+    <h4 class="blueFont">{{ message }}</h4>
   </div>
 </template>
 
@@ -9,7 +11,9 @@ export default {
   name: "App",
   components: {},
   data() {
-    return {};
+    return {
+      message: "Hello",
+    };
   },
   methods: {},
   computed: {},
@@ -20,7 +24,15 @@ export default {
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
-.red {
+
+.blueFont {
+  color: blue;
+}
+
+.greenFont {
+  color: green;
+}
+.redbg {
   background: red;
 }
 </style>
