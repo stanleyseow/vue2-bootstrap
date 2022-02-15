@@ -1,10 +1,21 @@
 # vue2-bootstrap
 
-This repo is the starting point for Vue2 Tutorial
+## Project setup
+```
+npm install
+```
 
-Once the repo is cloned, type
-
-npm i
-
+### Compiles and hot-reloads for development
+```
 npm run serve
+```
 
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
