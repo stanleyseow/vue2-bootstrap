@@ -11,14 +11,14 @@
             <br />
             Price: {{ item.price }}
             <br />
-            <b-button class="mr-2" variant="success" size="sm" v-on:click="increase5(item)">
+            <b-button variant="success" size="sm" v-on:click="increase5(item)">
               5+
             </b-button>
             <b-button variant="success" size="sm" v-on:click="increase(item)">
               +
             </b-button>
             {{ item.quantity }}
-            <b-button class="mr-2" variant="danger" size="sm" v-on:click="decrease(item)">
+            <b-button variant="danger" size="sm" v-on:click="decrease(item)">
               -
             </b-button>
             <b-button variant="danger" size="sm" v-on:click="decrease5(item)">
@@ -37,8 +37,7 @@
     Item Qty Price Subtotal ==== === ===== ========
     <div v-for="item in products" :key="item">
       <div v-if="item.quantity > 0">
-        {{ item.name }}- 
-        <!-- {{iten.quantity}} -{{item.price}}- {{item.price * item.quantity}} -->
+        {{ item.name }}
       </div>
     </div>
 
@@ -157,18 +156,18 @@ export default {
       for (let i = 0; i < this.products.length; i++) {
         total += this.products[i].quantity * this.products[i].price;
       }
-      // this.totalSales = total;
+      this.totalSales = total;
       return total;
     },
 
     calcDiscount() {
-      // if (this.totalSales > 60) {
-      //   this.discountPct = 0.15;
-      // } else if (this.totalSales > 40) {
-      //   this.discountPct = 0.1;
-      // } else {
-      //   this.discountPct = 0;
-      // }
+      if (this.totalSales > 60) {
+        this.discountPct = 0.15;
+      } else if (this.totalSales > 40) {
+        this.discountPct = 0.1;
+      } else {
+        this.discountPct = 0;
+      }
 
       return this.totalSales * (1 - this.discountPct);
     },
