@@ -1,103 +1,95 @@
 <template>
   <div id="app">
-    <b-row>
-      <div v-for="item in products" :key="item">
-        <b-col>
-          <b-card>
-            {{ item.name }}
-            <br />
+    <h2 class="greenFont">My first ever Vue Tutorial</h2>
+      <h4 class="blueFont">{{ message }}</h4>
+      Name:<input type="text" v-model="name"/> <br> 
+      Addr:<input type="text" v-model="addr"/> <br> 
+      Email:<input type="text" v-model="email"/> <br> 
+      Tel:<input type="text" v-model="tel"/>  <br><br>
+      <h2>Name : {{ name }}</h2>
+      <h3>Addr :{{ addr }}</h3>
+      <h3>Email: {{ email }}</h3>
+      <h3>Tel: {{ tel }}</h3>
+    <button class="greenFont" @click="increase"> +1</button>
+    <button class="redFont" @click="decrease"> -1</button>
+    
+    
+    <h1>Conditional Rendering</h1>
+    <p v-if="showText">This is true!</p>
+    <p v-else>This is false!</p>
 
-            <img :src="item.image" width="100%" />
-            <br />
-            Price: {{ item.price }}
-            <br />
-            <b-button class="mr-2" variant="success" size="sm" v-on:click="increase5(item)">
-              5+
-            </b-button>
-            <b-button variant="success" size="sm" v-on:click="increase(item)">
-              +
-            </b-button>
-            {{ item.quantity }}
-            <b-button class="mr-2" variant="danger" size="sm" v-on:click="decrease(item)">
-              -
-            </b-button>
-            <b-button variant="danger" size="sm" v-on:click="decrease5(item)">
-              -5
-            </b-button>
+    <b-btn @click="showText= !showText">Click me to change text.</b-btn>
 
-            <br />
-            Subtotal: {{ item.quantity * item.price }}
-          </b-card>
-        </b-col>
-      </div>
-    </b-row>
+    ================
 
-    <hr />
+    <p v-if="showNumber== 1">This is 1.</p>
+    <p v-else-if="showNumber== 2">This is 2.</p>
+    <p v-else>This is neither one.</p>
 
-    Item Qty Price Subtotal ==== === ===== ========
-    <div v-for="item in products" :key="item">
-      <div v-if="item.quantity > 0">
-        {{ item.name }}- 
-        <!-- {{iten.quantity}} -{{item.price}}- {{item.price * item.quantity}} -->
-      </div>
+    <div v-for="i,index in products" :key="i.name" :index="index">
+      <p :style="'color:'+i.fontColor">{{index+1}}. Name: {{i.name}}</p>
+      <p>{{i.quantity}} pcs</p>
+      <img :src="i.image"> Image Source: {{i.image}}
+      <p>Price: RM{{products[index].price}}</p>
+
     </div>
 
-    total sales : {{ calcTotal }} <br />
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <p>Computed Caps: "{{ allCapsMessage }}"</p>
 
-    <!-- 
-    if total more than 40, give 10% discount
-    if total more than 60, give 15% discount 
 
-    display discount % given  
-    -->
+    <p>Original Total: {{counter}}</p>
+    <p>Discounted Total: {{totalPrice}}</p>
 
-    total discount (amt) : {{ calcDiscount }} <br />
-    discount given in % : {{ discountPct * 100 }}% <br />
+    <button class="greenFont" @click="increase"> +1</button>
+    <button class="redFont" @click="decrease"> -1</button>
+    <br>
+    <button class="greenFont" @click="increase5"> +5</button>
+    <button class="redFont" @click="decrease5"> -5</button>
 
-    *** if sales above 80, give free shipping, else fee is 10 <br />
-    shipping fees : <br />
 
-    <b-row>
-      <b-col cols="4">
-        Delivery Area :
-        <b-form-select
-          v-model="pickupArea"
-          :options="areaOptions"
-        ></b-form-select>
-      </b-col>
-    </b-row>
-    Shipping Fees: {{ calcShippingFees }} <br />
-    Grand Total : <br />
+
+
+
+
   </div>
 </template>
 
 <script>
 export default {
-  name: "App",
-  components: {},
-  data() {
-    return {
+  data(){
+    return{
+      // message: "Please enter your details below",
       name: "",
-      mobile: "",
+      addr: "",
       email: "",
-      quantity: 0,
-      totalSales: 0,
-      discountPct: 0,
-      pickupArea: 0,
-      areaOptions: [
-        { value: "0", text: "Mont Kiara" },
-        { value: "1", text: "Cheras" },
-        { value: "2", text: "Puchong" },
-        { value: "3", text: "Kepong" },
-        { value: "4", text: "Others" },
-      ],
+      tel: "",
+      image1: "apple.jpg",
+      image2: "orange.jpg",
+      image3: "strawberry.jpg",
+      url1: "https://apple.com",
+      url2: "https://orange.com",
+      url3: "https://abc.com",
+      web1: "Fruit Company",
+      web2: "Orange Company",
+      web3: "Another Fruit Company",
+      counter: 0,
+
+      message: "hello world from vue js",
+      showText: true,
+
+      showNumber: 10,
+
       products: [
         {
           name: "Apple",
-          quantity: 0,
+          quantity: 10,
           price: 10,
           stock: 0,
           image: "apple.jpg",
+          url: "https://www.google.com",
+          fontColor: "red"
         },
         {
           name: "Orange",
@@ -105,20 +97,29 @@ export default {
           price: 12,
           stock: 0,
           image: "orange.jpg",
+          url: "https://www.facebook.com",
+          fontColor: "yellow"
+
+
         },
         {
           name: "Strawberry",
-          quantity: 0,
+          quantity: 5,
           price: 9,
           stock: 0,
           image: "strawberry.jpg",
+          url: "https://www.discord.com",
+          fontColor: "green"
+
         },
         {
           name: "Strawberry 2",
-          quantity: 0,
+          quantity: 7,
           price: 7,
           stock: 0,
           image: "strawberry.jpg",
+          fontColor: "green"
+
         },
         {
           name: "Orange 2",
@@ -126,6 +127,8 @@ export default {
           price: 13,
           stock: 0,
           image: "orange.jpg",
+          fontColor: "yellow"
+
         },
         {
           name: "Apple 2",
@@ -133,79 +136,48 @@ export default {
           price: 11,
           stock: 0,
           image: "apple.jpg",
+          fontColor: "red"
+
         },
       ],
-    };
+    }
   },
-  methods: {
-    increase(item) {
-      return item.quantity++;
+
+  methods:{
+
+    increase() {
+      this.counter = this.counter + 1;
     },
-    decrease(item) {
-      return item.quantity--;
+    decrease() {
+      this.counter = this.counter - 1;
     },
-    increase5(item) {
-      return (item.quantity = item.quantity + 5);
+    increase5() {
+      this.counter = this.counter + 5;
     },
-    decrease5(item) {
-      return (item.quantity = item.quantity - 5);
+    decrease5() {
+      this.counter = this.counter - 5;
     },
   },
-  computed: {
-    calcTotal() {
-      let total = 0;
-      for (let i = 0; i < this.products.length; i++) {
-        total += this.products[i].quantity * this.products[i].price;
-      }
-      // this.totalSales = total;
-      return total;
+
+  computed:{
+    reversedMessage() {
+      return this.message.split('').reverse().join('') 
     },
 
-    calcDiscount() {
-      // if (this.totalSales > 60) {
-      //   this.discountPct = 0.15;
-      // } else if (this.totalSales > 40) {
-      //   this.discountPct = 0.1;
-      // } else {
-      //   this.discountPct = 0;
-      // }
+    allCapsMessage(){
+      return this.message.toUpperCase()
+    },
 
-      return this.totalSales * (1 - this.discountPct);
-    },
-    calcShippingFees() {
-      let fees = 20;
-      if (this.pickupArea == 0) {
-        fees = 15;
-      } else if (this.pickupArea == 5) {
-        fees = 25;
-      }
-      return fees;
-    },
-  },
-};
+    totalPrice(){
+      let discount=0.15 
+
+      return this.counter*discount 
+    }
+  }
+
+}
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-}
-.font30 {
-  font-size: 30px;
-}
-.font20 {
-  font-size: 10px;
-}
-.purple {
-  color: purple;
-}
-.bold {
-  font-weight: bold;
-}
-.bg-red {
-  background: red;
-}
 
-.bg-cyan {
-  background: cyan;
-}
 </style>
